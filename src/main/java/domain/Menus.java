@@ -8,6 +8,7 @@ import java.util.List;
  *    @author AnHyungJu
  */
 public class Menus {
+	private static final int MAXIMUM = 99;
 	private List<Menu> menus;
 
 	public Menus(List<Menu> menus) {
@@ -19,6 +20,11 @@ public class Menus {
 	}
 
 	public void add(Menu menu) {
+		if (menus.stream()
+			.filter(m -> m.equals(menu))
+			.count() >= MAXIMUM) {
+			throw new IllegalArgumentException("한 메뉴의 최대 수량은 99개 입니다.");
+		}
 		menus.add(menu);
 	}
 }
