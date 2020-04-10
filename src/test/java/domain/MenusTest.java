@@ -25,4 +25,12 @@ public class MenusTest {
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessageContaining("최대");
 	}
+
+	@DisplayName("메뉴가 하나도 없으면 false를 반환하는지 확인")
+	@Test
+	void hasMenu() {
+		Menus menus = new Menus(new ArrayList<>());
+
+		assertThat(menus.hasMenu()).isFalse();
+	}
 }
