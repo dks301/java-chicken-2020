@@ -4,6 +4,7 @@ import domain.Command;
 import domain.Menu;
 import domain.MenuCount;
 import domain.MenuRepository;
+import domain.OrderedMenus;
 import domain.Tables;
 import view.InputView;
 import view.OutputView;
@@ -80,7 +81,13 @@ public class Controller {
 	}
 
 	private static void pay() {
+		final Tables tables = Tables.getInstance();
+		OutputView.printTables(tables.getTables());
+		final int tableNumber = InputView.inputTableNumber();
 
+		if (tables.isOrderedTable(tableNumber)) {
+			OutputView.printOrderedMenus(new OrderedMenus(tables.selectBy(tableNumber).getMenus()));
+		}
 	}
 
 	private static void exit() {

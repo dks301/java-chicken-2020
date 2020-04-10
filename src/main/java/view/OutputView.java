@@ -1,8 +1,10 @@
 package view;
 
 import java.util.List;
+import java.util.Map;
 
 import domain.Menu;
+import domain.OrderedMenus;
 import domain.Table;
 
 public class OutputView {
@@ -63,5 +65,15 @@ public class OutputView {
 
 	public static void printExit() {
 		System.out.println("프로그램을 종료합니다.");
+	}
+
+	public static void printOrderedMenus(OrderedMenus orderedMenus) {
+		System.out.println("## 주문 내역");
+		System.out.println("메뉴 수량 금액");
+		Map<Menu, Integer> ordered = orderedMenus.getOrderedMenus();
+
+		for (Menu menu : ordered.keySet()) {
+			System.out.println(String.format("%s %d %d", menu.getName(), ordered.get(menu), menu.getPrice()));
+		}
 	}
 }

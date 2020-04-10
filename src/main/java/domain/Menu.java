@@ -41,4 +41,16 @@ public class Menu {
 	public int getNumber() {
 		return number;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public int getPrice() {
+		return price;
+	}
 }

@@ -27,4 +27,8 @@ public class Table {
 	public int getNumber() {
 		return number;
 	}
+
+	public Menus getMenus() {
+		return menus;
+	}
 }

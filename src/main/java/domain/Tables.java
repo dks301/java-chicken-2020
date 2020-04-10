@@ -18,15 +18,24 @@ public class Tables {
 		return TablesSingletonHolder.INSTANCE;
 	}
 
+	public boolean isOrderedTable(int tableNumber) {
+		Table targetTable = selectBy(tableNumber);
+		return targetTable.hasMenu();
+	}
+
 	public void addMenuTo(int tableNumber, Menu menu, MenuCount menuCount) {
-		Table targetTable = tables.stream()
-			.filter(table -> table.getNumber() == tableNumber)
-			.findFirst()
-			.orElseThrow(() -> new IllegalArgumentException("유효하지 않은 테이블 번호입니다."));
+		Table targetTable = selectBy(tableNumber);
 
 		for (int i = 0; i < menuCount.getMenuCount(); i++) {
 			targetTable.addMenu(menu);
 		}
+	}
+
+	public Table selectBy(int tableNumber) {
+		return tables.stream()
+			.filter(table -> table.getNumber() == tableNumber)
+			.findFirst()
+			.orElseThrow(() -> new IllegalArgumentException("유효하지 않은 테이블 번호입니다."));
 	}
 
 	public List<Table> getTables() {
