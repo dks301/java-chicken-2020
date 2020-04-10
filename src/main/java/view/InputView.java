@@ -48,4 +48,16 @@ public class InputView {
 			return inputMenuCount();
 		}
 	}
+
+	public static int inputPayType(int tableNumber) {
+		System.out.println(String.format("## %d번 테이블의 결제를 진행합니다.", tableNumber));
+		System.out.println("## 신용카드는 1번, 현금은 2번");
+		try {
+			String payType = scanner.nextLine();
+			return Integer.parseInt(payType);
+		} catch (NumberFormatException e) {
+			System.out.println("지불방법을 숫자로 입력해주세요");
+			return inputPayType(tableNumber);
+		}
+	}
 }

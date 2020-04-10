@@ -22,6 +22,15 @@ public class OrderedMenus {
 		}
 	}
 
+	public double calculateTotalPay() {
+		double total = 0;
+
+		for (Menu menu : orderedMenus.keySet()) {
+			total += (menu.getPrice() * orderedMenus.get(menu));
+		}
+		return total;
+	}
+
 	public Map<Menu, Integer> getOrderedMenus() {
 		return orderedMenus;
 	}

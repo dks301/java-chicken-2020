@@ -76,4 +76,9 @@ public class OutputView {
 			System.out.println(String.format("%s %d %d", menu.getName(), ordered.get(menu), menu.getPrice()));
 		}
 	}
+
+	public static void printTotalPay(double totalPay) {
+		System.out.println("## 최종 결제할 금액");
+		System.out.println(String.format("%d원", totalPay));
+	}
 }
