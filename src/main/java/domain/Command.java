@@ -6,7 +6,7 @@ package domain;
  *    @author AnHyungJu
  */
 public class Command {
-	private static final int REGISTER_ORDER = 1;
+	private static final int ORDER = 1;
 	private static final int PAY = 2;
 	private static final int EXIT = 3;
 
@@ -18,8 +18,20 @@ public class Command {
 	}
 
 	private void validate(int command) {
-		if (command != REGISTER_ORDER && command != PAY && command != EXIT) {
+		if (command != ORDER && command != PAY && command != EXIT) {
 			throw new IllegalArgumentException("유효하지 않은 명령어입니다.");
 		}
+	}
+
+	public boolean isOrder() {
+		return this.command == ORDER;
+	}
+
+	public boolean isPay() {
+		return this.command == PAY;
+	}
+
+	public boolean isExit() {
+		return this.command == EXIT;
 	}
 }
