@@ -18,13 +18,13 @@ public class Tables {
 		return TablesSingletonHolder.INSTANCE;
 	}
 
-	public void addMenuTo(int tableNumber, Menu menu, int menuCount) {
+	public void addMenuTo(int tableNumber, Menu menu, MenuCount menuCount) {
 		Table targetTable = tables.stream()
 			.filter(table -> table.getNumber() == tableNumber)
 			.findFirst()
 			.orElseThrow(() -> new IllegalArgumentException("유효하지 않은 테이블 번호입니다."));
 
-		for (int i = 0; i < menuCount; i++) {
+		for (int i = 0; i < menuCount.getMenuCount(); i++) {
 			targetTable.addMenu(menu);
 		}
 	}

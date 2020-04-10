@@ -2,6 +2,7 @@ package controller;
 
 import domain.Command;
 import domain.Menu;
+import domain.MenuCount;
 import domain.MenuRepository;
 import domain.Tables;
 import view.InputView;
@@ -39,11 +40,21 @@ public class Controller {
 		try {
 			final int tableNumber = InputView.inputTableNumber();
 			final Menu menu = readMenu();
-			final int menuCount = InputView.inputMenuCount();
+			final MenuCount menuCount = readMenuCount();
 			tables.addMenuTo(tableNumber, menu, menuCount);
 		} catch (IllegalArgumentException e) {
 			OutputView.printException(e);
 			order();
+		}
+	}
+
+	private static MenuCount readMenuCount() {
+		try {
+			int menuCount = InputView.inputMenuCount();
+			return new MenuCount(menuCount);
+		} catch (IllegalArgumentException e) {
+			OutputView.printException(e);
+			return readMenuCount();
 		}
 	}
 
