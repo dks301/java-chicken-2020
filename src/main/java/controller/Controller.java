@@ -2,6 +2,7 @@ package controller;
 
 import java.util.List;
 
+import domain.Command;
 import domain.Menu;
 import domain.MenuRepository;
 import domain.Table;
@@ -16,6 +17,7 @@ import view.OutputView;
  */
 public class Controller {
 	public static void run() {
+		start();
 		final List<Table> tables = TableRepository.tables();
 		OutputView.printTables(tables);
 
@@ -23,5 +25,19 @@ public class Controller {
 
 		final List<Menu> menus = MenuRepository.menus();
 		OutputView.printMenus(menus);
+	}
+
+	private static void start() {
+		Command command = readCommand();
+	}
+
+	private static Command readCommand() {
+		try {
+			OutputView.printCommand();
+			return new Command(InputView.inputCommand());
+		} catch (IllegalArgumentException e) {
+			OutputView.printException(e);
+			return readCommand();
+		}
 	}
 }
