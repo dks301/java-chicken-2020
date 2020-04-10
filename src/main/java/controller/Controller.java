@@ -1,12 +1,9 @@
 package controller;
 
-import java.util.List;
-
 import domain.Command;
 import domain.Menu;
 import domain.MenuRepository;
-import domain.Table;
-import domain.TableRepository;
+import domain.Tables;
 import view.InputView;
 import view.OutputView;
 
@@ -37,12 +34,28 @@ public class Controller {
 	}
 
 	private static void order() {
-		final List<Table> tables = TableRepository.tables();
-		OutputView.printTables(tables);
+		final Tables tables = Tables.getInstance();
+		OutputView.printTables(tables.getTables());
+		try {
+			final int tableNumber = InputView.inputTableNumber();
+			final Menu menu = readMenu();
+			final int menuCount = InputView.inputMenuCount();
+			tables.addMenuTo(tableNumber, menu, menuCount);
+		} catch (IllegalArgumentException e) {
+			OutputView.printException(e);
+			order();
+		}
+	}
 
-		final int tableNumber = InputView.inputTableNumber();
-		final List<Menu> menus = MenuRepository.menus();
-		OutputView.printMenus(menus);
+	private static Menu readMenu() {
+		try {
+			OutputView.printMenus(MenuRepository.menus());
+			int selectMenu = InputView.inputSelectMenu();
+			return MenuRepository.getMenu(selectMenu);
+		} catch (IllegalArgumentException e) {
+			OutputView.printException(e);
+			return readMenu();
+		}
 	}
 
 	private static Command readCommand() {
